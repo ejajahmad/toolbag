@@ -1,21 +1,30 @@
-import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Stack, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export default function PriceCalculator() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     name: "",
     price: "",
-    quantity: "",
+    priceErr: "",
+    quantity: "1",
     date: new Date(),
     total: "",
   });
 
   const handleOnChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value, priceErr: "" });
   };
 
   const handleCalculate = (e) => {
-    setData({ ...data, total: data.price * data.quantity });
+    if (data.quantity !== "" && data.price !== "") {
+      setData({ ...data, total: data.price * data.quantity });
+    } else if (data.price === "") {
+      setData({ ...data, priceErr: "Enter a valid price" });
+    }
   };
 
   const handleOnSubmit = (e) => {
@@ -41,11 +50,7 @@ export default function PriceCalculator() {
             <FormControl>
               <FormLabel>Price*</FormLabel>
               <Input type="number" name="price" value={data.price} onChange={handleOnChange} />
-              {/* {!isError ? (
-            <FormHelperText>Enter the email you'd like to receive the newsletter on.</FormHelperText>
-          ) : (
-            <FormErrorMessage>Email is required.</FormErrorMessage>
-          )} */}
+              {data.priceErr && <FormHelperText color="red">{data.priceErr}</FormHelperText>}
             </FormControl>
             <FormControl>
               <FormLabel></FormLabel>
@@ -55,11 +60,23 @@ export default function PriceCalculator() {
             </FormControl>
           </form>
         </Box>
+
         {data.total && (
           <Box>
             Total Price of {data.name} is ₹{data.total}
           </Box>
         )}
+
+        <Stack>
+          <Button onClick={() => navigate("/")}>Back to home</Button>
+          <Text>Or</Text>
+          <Button colorScheme="facebook" onClick={() => navigate("/tip-calculator")}>
+            Tip Calculator
+          </Button>
+          <Button colorScheme="whatsapp" onClick={() => navigate("/emi-calculator")}>
+            EMI Calculator
+          </Button>
+        </Stack>
       </Stack>
     </div>
   );

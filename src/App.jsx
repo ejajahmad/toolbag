@@ -7,6 +7,8 @@ import Login from "./components/Auth/Login";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 import PriceCalculator from "./components/PriceCalculator";
+import TipCalculator from "./components/TipCalculator";
+import EmiCalculator from "./components/EmiCalculator";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           </Route>
         </Route>
         <Route path="/price-calculator" element={<PriceCalculator />} />
+        <Route path="/tip-calculator" element={<TipCalculator />} />
+        <Route path="/emi-calculator" element={<EmiCalculator />} />
       </Routes>
     </div>
   );
