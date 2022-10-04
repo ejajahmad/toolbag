@@ -9,6 +9,8 @@ import SignUp from "./components/Auth/SignUp";
 import PriceCalculator from "./components/PriceCalculator";
 import TipCalculator from "./components/TipCalculator";
 import EmiCalculator from "./components/EmiCalculator";
+import BookViewer from "./components/BookViewer";
+import DocContainer from "./components/DocEditor/DocContainer";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="signup" element={<SignUp />} />
           </Route>
         </Route>
+        <Route path="/book" element={<BookViewer />} />
+        <Route path="/doc" element={<DocContainer />} />
         <Route path="/price-calculator" element={<PriceCalculator />} />
         <Route path="/tip-calculator" element={<TipCalculator />} />
         <Route path="/emi-calculator" element={<EmiCalculator />} />

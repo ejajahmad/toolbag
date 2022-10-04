@@ -72,3 +72,13 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+.menuBox  {
+  transition: all 0.1s ease-in-out;
+  height: 0;
+}
+
+.menuBtn:hover .menuBox  {
+  height: 100px;
+}
